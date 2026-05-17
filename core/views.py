@@ -13,5 +13,16 @@ class TellerSessionViewSet(viewsets.ModelViewSet):
     serializer_class = TellerSessionSerializer
 
 class TaskViewSet(viewsets.ModelViewSet):
-    queryset = Task.objects.all()
     serializer_class = TaskSerializer
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['title', 'description']
+    ordering_fields = ['created_at', 'is_completed']
+
+    def get_queryset(self):
+        queryset = Task.objects.all()
+        is_completed = self.request.query_params.get('is_completed')
+        if is_completed is not None:
+            is_completed = is_completed.lower() == 'true'
+            queryset = queryset.filter(is_completed=is_completed)
+        return queryset
+

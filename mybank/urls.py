@@ -7,7 +7,7 @@ from core.views import TransactionViewSet, TellerSessionViewSet, TaskViewSet
 router = DefaultRouter()
 router.register(r'transactions', TransactionViewSet)
 router.register(r'teller-sessions', TellerSessionViewSet)
-router.register(r'tasks', TaskViewSet)
+router.register(r'tasks', TaskViewSet, basename='task')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
