@@ -1,6 +1,6 @@
 from rest_framework import viewsets, filters
-from .models import Transaction, TellerSession
-from .serializers import TransactionSerializer, TellerSessionSerializer
+from .models import Transaction, TellerSession, Task
+from .serializers import TransactionSerializer, TellerSessionSerializer, TaskSerializer
 
 class TransactionViewSet(viewsets.ModelViewSet):
     queryset = Transaction.objects.all()
@@ -11,3 +11,7 @@ class TransactionViewSet(viewsets.ModelViewSet):
 class TellerSessionViewSet(viewsets.ModelViewSet):
     queryset = TellerSession.objects.all()
     serializer_class = TellerSessionSerializer
+
+class TaskViewSet(viewsets.ModelViewSet):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
